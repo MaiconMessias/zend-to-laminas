@@ -1,0 +1,46 @@
+<?php
+// module/Album/view/pessoa/pessoa/add.phtml:
+$this->layout('layout/layoutagenda/layoutpessoa');
+$title = 'Dados da Pessoa';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+$nome = $form->get('nome');
+$nome->setAttribute('class', 'form-control');
+$nome->setAttribute('placeholder', 'Nome');
+
+// This provides CSS classes for the submit button:
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+$form->setAttribute('action', $this->url('pessoa', [
+                    'action' => 'edit',
+                    'id' => $id,
+]));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+<?php // Wrap the elements in divs marked as form groups, and render the
+      // label, element, and errors separately within ?>
+<div class="form-group">
+    <?= $this->formLabel($nome) ?>
+    <?= $this->formElement($nome) ?>
+    <?= $this->formElementErrors()->render($nome, ['class' => 'help-block']) ?>
+</div>
+
+<?php
+echo $this->formSubmit($submit);
+echo $this->formHidden($form->get('id'));
+echo $this->form()->closeTag();
+?>
+<a href="<?= $this->url('pessoa', ['action' => 'index']) ?>" class="btn btn-primary mt-5">Voltar para Pesquisa</a>
+
+
+<?php 
+    // Footer
+    //$this->layout()->setVariable('infoText', '<a href=' . $this->url('pessoa', ['action' => 'add']) . ' class="nav-link px-2 text-muted">Voltar</a>');
+?> 
+
+

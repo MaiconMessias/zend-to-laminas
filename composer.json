@@ -1,0 +1,57 @@
+{
+    "name": "laminas/skeleton-application",
+    "description": "Skeleton Application for Zend Framework zend-mvc applications",
+    "type": "project",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "framework",
+        "mvc",
+        "zf"
+    ],
+    "homepage": "http://framework.zend.com/",
+    "require": {
+        "php": "^5.6 || ^7.0",
+        "laminas/laminas-component-installer": "^1.0 || ^2.1",
+        "laminas/laminas-mvc": "^3.1.1",
+        "laminas/laminas-development-mode": "^3.8",
+        "laminas/laminas-dependency-plugin": "^2.1",
+        "laminas/laminas-zendframework-bridge": "^1.6",
+        "laminas/laminas-db": "^2.15",
+        "laminas/laminas-form": "2.10.1",
+        "laminas/laminas-view": "^2.23",
+        "laminas/laminas-i18n": "2.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Application\\": "module/Application/src/",
+            "Pessoa\\": "module/Pessoa/src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ApplicationTest\\": "module/Application/test/"
+        }
+    },
+    "scripts": {
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
+        "development-disable": "laminas-development-mode disable",
+        "development-enable": "laminas-development-mode enable",
+        "development-status": "laminas-development-mode status",
+        "post-create-project-cmd": [
+            "@development-enable",
+            "php bin/update-gitignore.php"
+        ],
+        "serve": "php -S localhost:8080 -t public",
+        "test": "phpunit"
+    },
+    "config": {
+        "allow-plugins": {
+            "laminas/laminas-component-installer": true,
+            "laminas/laminas-dependency-plugin": true
+        }
+    },
+    "require-dev": {
+        "laminas/laminas-developer-tools": "^2.5"
+    }
+}

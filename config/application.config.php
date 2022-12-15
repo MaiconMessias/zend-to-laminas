@@ -6,11 +6,6 @@
  * @see https://docs.zendframework.com/tutorials/advanced-config/#environment-specific-application-configuration
  */
 return [
-    /**execute o comando: ./vendor/bin/laminas-development-mode enable 
-     * ou ./vendor/bin/laminas-development-mode disable, para habilitar ou desabilitar modo
-     * desenvolvedor
-     */ 
-    
     // Retrieve list of modules used in this application.
     'modules' => require __DIR__ . '/modules.config.php',
 

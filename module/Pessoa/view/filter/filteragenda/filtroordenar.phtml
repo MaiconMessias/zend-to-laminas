@@ -1,0 +1,49 @@
+<?php
+    use Laminas\Form\Element;
+    use Laminas\Form\Form;
+
+    $campos = new Element\Select('campo');
+    $campos->setLabel('Campo para ordenação?');
+    $campos->setAttribute('class', 'btn btn-secondary dropdown-toggle');
+    $campos->setValueOptions([
+        '0' => 'Id',
+        '1' => 'Nome',
+    ]);
+
+    $select = new Element\Select('ordenacao');
+    $select->setLabel('Ordem de visualização?');
+    $select->setAttribute('class', 'btn btn-secondary dropdown-toggle');
+    $select->setValueOptions([
+        '0' => 'Crescente',
+        '1' => 'Decrescente',
+    ]);
+
+    $submit = new Element\Submit('my-submit');
+    $submit->setAttribute('class', 'btn btn-primary mr-2');
+    $submit->setValue('Ordenar');
+
+    $form = new Form('form-filtro');
+    $form->add($campos);
+    $form->add($select);
+
+    $form->setAttribute('action', $this->url('pessoa', [
+                        'action' => 'index',
+                        ]));
+
+    $form->prepare();
+
+    echo $this->form()->openTag($form);
+?>
+<?php // Wrap the elements in divs marked as form groups, and render the
+      // label, element, and errors separately within ?>
+<div class="form-group">
+    <?= $this->formLabel($campos) ?>
+    <?= $this->formElement($campos) ?>
+    <?= $this->formLabel($select) ?>
+    <?= $this->formElement($select) ?>
+    <?= $this->formSubmit($submit); ?>
+</div>
+
+<?php
+    echo $this->form()->closeTag();
+?>

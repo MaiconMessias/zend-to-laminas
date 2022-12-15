@@ -6,18 +6,28 @@ $this->headTitle($title);
 ?>
 <h1><?= $this->escapeHtml($title) ?></h1>
 <?php
+$url = $this->url('pessoa', ['action' => 'delete', 'id' => $id]);
+
 $nome = $form->get('nome');
 $nome->setAttribute('class', 'form-control');
 $nome->setAttribute('placeholder', 'Nome');
+//$nome->setAttribute('disabled', true);
 
 // This provides CSS classes for the submit button:
 $submit = $form->get('submit');
-$submit->setAttribute('class', 'btn btn-primary');
+$submit->setAttribute('class', 'btn btn-primary mr-2');
 
 $form->setAttribute('action', $this->url('pessoa', [
-                    'action' => 'edit',
+                    'action' => 'editdelete',
                     'id' => $id,
 ]));
+
+// Componente dialog para confirmação de ações
+$dialogdeletar = $form->get('dialogdeletar');
+$dialogdeletar->setAttribute('class', 'btn btn-primary mr-2');
+$dialogdeletar->setAttribute('data-toggle', 'modal');
+$dialogdeletar->setAttribute('data-target', '#modalExemplo');
+
 $form->prepare();
 
 echo $this->form()->openTag($form);
@@ -32,15 +42,22 @@ echo $this->form()->openTag($form);
 
 <?php
 echo $this->formSubmit($submit);
+echo $this->formButton($dialogdeletar, 'Deletar');
 echo $this->formHidden($form->get('id'));
 echo $this->form()->closeTag();
 ?>
-<a href="<?= $this->url('pessoa', ['action' => 'index']) ?>" class="btn btn-primary mt-5">Voltar para Pesquisa</a>
+<p>
+    <a href="<?= $this->url('pessoa', ['action' => 'index']) ?>" class="btn btn-primary mt-5">Voltar para Pesquisa</a>
+</p>    
 
+
+<?php
+    // Modal de exclusão de arquivo
+    //include __DIR__ . '/../layout/layoutagenda/modaldelete.phtml';
+    include 'module/Application/view/window/modaldelete.phtml';
+?>
 
 <?php 
     // Footer
     //$this->layout()->setVariable('infoText', '<a href=' . $this->url('pessoa', ['action' => 'add']) . ' class="nav-link px-2 text-muted">Voltar</a>');
 ?> 
-
-

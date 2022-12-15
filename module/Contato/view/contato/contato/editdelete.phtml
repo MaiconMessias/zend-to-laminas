@@ -1,0 +1,64 @@
+<?php
+// module/Album/view/pessoa/pessoa/add.phtml:
+$this->layout('layout/layoutagenda/layoutpessoa');
+$title = 'Dados do Contato';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+$url = $this->url('contato', ['action' => 'delete', 'id' => $id]);
+
+$contato = $form->get('contato');
+$contato->setAttribute('class', 'form-control');
+$contato->setAttribute('placeholder', 'contato');
+
+$id_pessoa = $form->get('id_pessoa');
+$id_pessoa->setAttribute('class', 'form-control');
+
+// This provides CSS classes for the submit button:
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary mr-2');
+
+// Componente dialog para confirmação de ações
+$dialogdeletar = $form->get('dialogdeletar');
+$dialogdeletar->setAttribute('class', 'btn btn-primary mr-2');
+$dialogdeletar->setAttribute('data-toggle', 'modal');
+$dialogdeletar->setAttribute('data-target', '#modalExemplo');
+
+$form->setAttribute('action', $this->url('contato', [
+                    'action' => 'editdelete',
+                    'id' => $id,
+]));
+
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+<?php // Wrap the elements in divs marked as form groups, and render the
+      // label, element, and errors separately within ?>
+<div class="form-group">
+<?= $this->formLabel($contato) ?>
+    <?= $this->formElement($contato) ?>
+    <?= $this->formElementErrors()->render($contato, ['class' => 'help-block']) ?>
+    <?= $this->formLabel($id_pessoa) ?>
+    <?= $this->formElement($id_pessoa) ?>
+    <?= $this->formElementErrors()->render($id_pessoa, ['class' => 'help-block']) ?>
+</div>
+
+<?php
+echo $this->formSubmit($submit);
+echo $this->formButton($dialogdeletar, 'Deletar');
+echo $this->formHidden($form->get('id'));
+echo $this->form()->closeTag();
+?>
+<p>
+    <a href="<?= $this->url('contato', ['action' => 'index']) ?>" class="btn btn-primary mt-5">Voltar para Pesquisa</a>
+</p>    
+
+
+<?php
+    // Modal de exclusão de arquivo
+    //include __DIR__ . '/../layout/layoutagenda/modaldelete.phtml';
+    //include __DIR__ . '/../../window/modaldelete.phtml';
+    include 'module/Application/view/window/modaldelete.phtml'
+?>

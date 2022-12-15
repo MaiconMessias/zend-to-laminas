@@ -7,6 +7,7 @@
 
 return [
     // Additional modules to include when in development mode
+    // Habilitar ou desabilitar modo desenvolvedor ./vendor/bin/laminas-development-mode enable ou disabled
     'modules' => [
         'Laminas\DeveloperTools',
     ],

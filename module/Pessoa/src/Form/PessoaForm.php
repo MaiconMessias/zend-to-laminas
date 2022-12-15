@@ -30,5 +30,14 @@ class PessoaForm extends Form
                 'id'    => 'submitbutton',
             ],
         ]);
+        $this->add([
+            'name' => 'dialogdeletar',
+            'type' => 'button',
+            'attributes' => [
+                'value' => 'Deletar',
+                'id'    => 'deletarbutton',
+            ],
+        ]);
+
     }
 }

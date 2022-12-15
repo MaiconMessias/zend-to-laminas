@@ -19,12 +19,17 @@
         "laminas/laminas-db": "^2.15",
         "laminas/laminas-form": "2.10.1",
         "laminas/laminas-view": "^2.23",
-        "laminas/laminas-i18n": "2.6"
+        "laminas/laminas-i18n": "2.13.0",
+        "laminas/laminas-paginator": "^2.13",
+        "laminas/laminas-authentication": "^2.12",
+        "laminas/laminas-mvc-i18n": "1.4"
     },
     "autoload": {
         "psr-4": {
             "Application\\": "module/Application/src/",
-            "Pessoa\\": "module/Pessoa/src/"
+            "Pessoa\\": "module/Pessoa/src/",
+            "Login\\": "module/Login/src/",
+            "Contato\\": "module/Contato/src/"
         }
     },
     "autoload-dev": {

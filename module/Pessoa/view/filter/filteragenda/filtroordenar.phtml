@@ -4,7 +4,7 @@
 
     $campos = new Element\Select('campo');
     $campos->setLabel('Campo para ordenação?');
-    $campos->setAttribute('class', 'btn btn-secondary dropdown-toggle');
+    $campos->setAttribute('class', 'nav-link dropdown-toggle col ml-2 mr-2');
     $campos->setValueOptions([
         '0' => 'Id',
         '1' => 'Nome',
@@ -12,14 +12,14 @@
 
     $select = new Element\Select('ordenacao');
     $select->setLabel('Ordem de visualização?');
-    $select->setAttribute('class', 'btn btn-secondary dropdown-toggle');
+    $select->setAttribute('class', 'nav-link dropdown-toggle col ml-2');
     $select->setValueOptions([
         '0' => 'Crescente',
         '1' => 'Decrescente',
     ]);
 
     $submit = new Element\Submit('my-submit');
-    $submit->setAttribute('class', 'btn btn-primary mr-2');
+    $submit->setAttribute('class', 'btn btn-primary col ml-2');
     $submit->setValue('Ordenar');
 
     $form = new Form('form-filtro');
@@ -36,7 +36,7 @@
 ?>
 <?php // Wrap the elements in divs marked as form groups, and render the
       // label, element, and errors separately within ?>
-<div class="form-group">
+<div class="form-group row">
     <?= $this->formLabel($campos) ?>
     <?= $this->formElement($campos) ?>
     <?= $this->formLabel($select) ?>

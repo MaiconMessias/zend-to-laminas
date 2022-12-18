@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <?= $this->headTitle('ZF Skeleton Application')->setSeparator(' - ')->setAutoEscape(false) ?>
+    <?= $this->headTitle('Laminas MVC')->setSeparator(' - ')->setAutoEscape(false) ?>
 
     <?= $this->headMeta()
         ->appendName('viewport', 'width=device-width, initial-scale=1.0')
@@ -24,26 +24,28 @@
 <body>
     <header></header>
     <section>
-    <div class="container">
         <div class="container">
-            <?= $this->content ?>
+            <div class="container d-flex justify-content-center">
+                <div class="w-25 p-3 border bg-light">
+                    <?= $this->content ?>
+                </div>
+            </div>
         </div>
-    </div>
     </section>    
 
-    <div class="container">        
-        <footer class="py-3 my-4">
+    <div class="container w-100">        
+        <footer class="py-3 my-4 w-100 p-3">
             <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-            <li class="nav-item">
-            <?php if (isset($infoText)){
-                      echo $infoText;
-                  }
-            ?> 
-            </li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+                <li class="nav-item">
+                <?php if (isset($infoText)){
+                        echo $infoText;
+                      }
+                ?> 
+                </li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
             </ul>
             <p class="text-center text-muted">© Feito pelo Maicon 2022</p>
         </footer>

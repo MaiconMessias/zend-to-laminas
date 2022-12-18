@@ -21,7 +21,7 @@
 ?>
 <?php // Wrap the elements in divs marked as form groups, and render the
       // label, element, and errors separately within ?>
-<div class="form-group">
+<div class="form-group w-50 p-3 border bg-light">
     <?= $this->formLabel($nome) ?>
     <?= $this->formElement($nome) ?>
     <?= $this->formElementErrors()->render($nome, ['class' => 'help-block']) ?>

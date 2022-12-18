@@ -9,11 +9,11 @@ $this->headTitle($title);
 $url = $this->url('contato', ['action' => 'delete', 'id' => $id]);
 
 $contato = $form->get('contato');
-$contato->setAttribute('class', 'form-control');
+$contato->setAttribute('class', 'form-control col-2 ml-2 mr-2');
 $contato->setAttribute('placeholder', 'contato');
 
 $id_pessoa = $form->get('id_pessoa');
-$id_pessoa->setAttribute('class', 'form-control');
+$id_pessoa->setAttribute('class', 'form-control col-3 ml-2');
 
 // This provides CSS classes for the submit button:
 $submit = $form->get('submit');
@@ -36,7 +36,7 @@ echo $this->form()->openTag($form);
 ?>
 <?php // Wrap the elements in divs marked as form groups, and render the
       // label, element, and errors separately within ?>
-<div class="form-group w-50 p-3 border bg-light">
+<div class="form-group p-3 pr-5 border bg-light row">
 <?= $this->formLabel($contato) ?>
     <?= $this->formElement($contato) ?>
     <?= $this->formElementErrors()->render($contato, ['class' => 'help-block']) ?>

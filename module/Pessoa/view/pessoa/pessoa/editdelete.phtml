@@ -9,7 +9,7 @@ $this->headTitle($title);
 $url = $this->url('pessoa', ['action' => 'delete', 'id' => $id]);
 
 $nome = $form->get('nome');
-$nome->setAttribute('class', 'form-control');
+$nome->setAttribute('class', 'form-control col ml-2');
 $nome->setAttribute('placeholder', 'Nome');
 //$nome->setAttribute('disabled', true);
 
@@ -34,7 +34,7 @@ echo $this->form()->openTag($form);
 ?>
 <?php // Wrap the elements in divs marked as form groups, and render the
       // label, element, and errors separately within ?>
-<div class="form-group w-50 p-3 border bg-light">
+<div class="form-group w-50 p-3 border bg-light row">
     <?= $this->formLabel($nome) ?>
     <?= $this->formElement($nome) ?>
     <?= $this->formElementErrors()->render($nome, ['class' => 'help-block']) ?>

@@ -19,8 +19,9 @@
     <?= $this->inlineScript()
         ->prependFile($this->basePath('js/bootstrap.min.js'))
         ->prependFile($this->basePath('js/jquery-3.3.1.min.js'))
-        //->prependFile($this->basePath('js/dist/jquery.inputmask.js'))
-        ->prependFile($this->basePath('js/dist/js.js'))
+        //->prependFile($this->basePath('js/dist/jquery.inputmask.min.js'))
+        //->prependFile('https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.7/inputmask.es6.js')
+        //->prependFile($this->basePath('js/dist/jquery.inputmask.min.js'))
         
     ?>
 </head>
@@ -54,12 +55,12 @@
             <p class="text-center text-muted">© Feito pelo Maicon 2022</p>
 
             <!-- teste funcionamento jquery -->            
-            <script>
+            <!-- <script>
                 $(document).ready(function(){
                     console.log("OK");
-                    //$("#example2").inputmask("(999)9999-9999");
+                    $("#example2").inputmask("(999)9999-9999");
                 });
-            </script> 
+            </script> -->
         </footer>
     </div>
 

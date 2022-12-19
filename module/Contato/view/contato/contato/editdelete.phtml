@@ -5,6 +5,11 @@ $title = 'Dados do Contato';
 $this->headTitle($title);
 ?>
 
+<?= $this->inlineScript()
+    ->prependFile($this->basePath('js/dist/jquery.inputmask.min.js'))
+    ->prependFile($this->basePath('js/contato/maskcontato.js'))
+?>
+
 <h1><?= $this->escapeHtml($title) ?></h1>
 <?php
 $url = $this->url('contato', ['action' => 'delete', 'id' => $id]);
@@ -12,6 +17,7 @@ $url = $this->url('contato', ['action' => 'delete', 'id' => $id]);
 $contato = $form->get('contato');
 $contato->setAttribute('class', 'form-control col-2 ml-2 mr-2');
 $contato->setAttribute('placeholder', 'contato');
+$contato->setAttribute('id', 'tel');
 
 $id_pessoa = $form->get('id_pessoa');
 $id_pessoa->setAttribute('class', 'form-control col-3 ml-2');
@@ -62,3 +68,5 @@ echo $this->form()->closeTag();
     //include __DIR__ . '/../../window/modaldelete.phtml';
     include 'module/Application/view/window/modaldelete.phtml'
 ?>
+
+

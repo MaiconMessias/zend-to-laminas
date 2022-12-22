@@ -23,6 +23,48 @@ class PessoaForm extends Form
             ],
         ]);
         $this->add([
+            'name' => 'tipo',
+            'type' => 'select',
+            'options' => [
+                'label' => 'Tipo',
+            ],
+        ]);        
+        $this->add([
+            'name' => 'rg',
+            'type' => 'text',
+            'options' => [
+                'label' => 'RG',
+            ],
+        ]);        
+        $this->add([
+            'name' => 'cpfcnpj',
+            'type' => 'text',
+            'options' => [
+                'label' => 'CPF/CNPJ',
+            ],
+        ]);        
+        $this->add([
+            'name' => 'datanascimento',
+            'type' => 'date',
+            'options' => [
+                'label' => 'Data Nascimento',
+            ],
+        ]);        
+        $this->add([
+            'name' => 'localnascimento',
+            'type' => 'text',
+            'options' => [
+                'label' => 'Local Nascimento',
+            ],
+        ]);        
+        $this->add([
+            'name' => 'estadonascimento',
+            'type' => 'select',
+            'options' => [
+                'label' => 'Estado Nascimento',
+            ],
+        ]);        
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => [

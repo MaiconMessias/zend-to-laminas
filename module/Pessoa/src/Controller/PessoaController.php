@@ -8,6 +8,8 @@ use Pessoa\Model\PessoaTable;
 use Pessoa\Form\PessoaForm;
 use Pessoa\Model\Pessoa;
 use Laminas\Form\Form;
+use Pessoa\Model\Select\TipoPessoaSelect;
+use Pessoa\Model\Select\EstadoSelect;
 
 class PessoaController extends AbstractActionController {
 
@@ -26,7 +28,7 @@ class PessoaController extends AbstractActionController {
         if (null !== $this->getRequest()) {
             $request = $this->getRequest();
             // Implementar atribuição dos valores dos campos em outro arquivo
-            $campo = $request->getPost()['campo'] == 0 ? 'id' : 'nome';
+            $campo = $request->getPost()['campo'] == 0 ? 'pessoa.id' : 'pessoa.nome';
             $ordem = $request->getPost()['ordenacao'] == 0 ? 'ASC' : 'DESC';
             $ordenacao = $campo . ' ' . $ordem;
         }
@@ -51,6 +53,22 @@ class PessoaController extends AbstractActionController {
     {
         $form = new PessoaForm();
         $form->get('submit')->setValue('Adicionar');
+
+        // Select tipo pessoa
+        $tipopessoaselect = new TipoPessoaSelect();
+        $tipo = $form->get('tipo');
+
+        $tipo->setValueOptions(
+            $tipopessoaselect->arrayTipoPessoas()
+        );
+
+        // select estado 
+        $estadoselect = new EstadoSelect();
+        $estadonasc = $form->get('estadonascimento');
+
+        $estadonasc->setValueOptions(
+            $estadoselect->arrayEstados()
+        );
 
         $request = $this->getRequest();
 
@@ -91,6 +109,23 @@ class PessoaController extends AbstractActionController {
         $form = new PessoaForm();
         $form->bind($pessoa);
         $form->get('submit')->setAttribute('value', 'Editar');
+
+        // Select tipo pessoa
+        $tipopessoaselect = new TipoPessoaSelect();
+        $tipo = $form->get('tipo');
+
+        $tipo->setValueOptions(
+            $tipopessoaselect->arrayTipoPessoas()
+        );
+        
+        // select estado 
+        $estadoselect = new EstadoSelect();
+        $estadonasc = $form->get('estadonascimento');
+
+        $estadonasc->setValueOptions(
+            $estadoselect->arrayEstados()
+        );
+
 
         $request = $this->getRequest();
         $viewData = ['id' => $id, 'form' => $form];

@@ -7,7 +7,7 @@
   use Contato\Model\ContatoTable;
   use Contato\Form\ContatoForm;
   use Contato\Model\Contato;
-  use Contato\Model\ContatoSelect;
+  use Contato\Model\Select\ContatoSelect;
   
   class ContatoController extends AbstractActionController {
       // Add this property:

@@ -6,6 +6,12 @@ $this->headTitle($title);
 ?>
 <h1><?= $this->escapeHtml($title) ?></h1>
 <?php
+
+    $this->inlineScript()
+         ->prependFile($this->basePath('js/dist/jquery.inputmask.min.js'))
+         ->prependFile($this->basePath('js/pessoa/maskpessoa.js'));
+
+
 $url = $this->url('pessoa', ['action' => 'delete', 'id' => $id]);
 
 $nome = $form->get('nome');
@@ -13,9 +19,35 @@ $nome->setAttribute('class', 'form-control col ml-2');
 $nome->setAttribute('placeholder', 'Nome');
 //$nome->setAttribute('disabled', true);
 
+$tipo = $form->get('tipo');
+$tipo->setAttribute('class', 'form-control col ml-2');
+$tipo->setAttribute('id', 'tipo');
+
+$rg = $form->get('rg');
+$rg->setAttribute('class', 'form-control col ml-2');
+$rg->setAttribute('placeholder', '99.999.999-9');
+$rg->setAttribute('id', 'rg');
+
+$cpfcnpj = $form->get('cpfcnpj');
+$cpfcnpj->setAttribute('class', 'form-control col ml-2');
+$cpfcnpj->setAttribute('placeholder', '999.999.999-99');
+$cpfcnpj->setAttribute('id', 'cpfcnpj');
+
+$datanasc = $form->get('datanascimento');
+$datanasc->setAttribute('class', 'form-control col ml-2');
+$datanasc->setAttribute('placeholder', 'Data Nascimento');
+
+$localnasc = $form->get('localnascimento');
+$localnasc->setAttribute('class', 'form-control col ml-2');
+$localnasc->setAttribute('placeholder', 'Local Nascimento');
+
+$estadonasc = $form->get('estadonascimento');
+$estadonasc->setAttribute('class', 'form-control col ml-2');
+$estadonasc->setAttribute('placeholder', 'Estado Nascimento');
+
 // This provides CSS classes for the submit button:
 $submit = $form->get('submit');
-$submit->setAttribute('class', 'btn btn-primary mr-2');
+$submit->setAttribute('class', 'btn btn-primary');
 
 $form->setAttribute('action', $this->url('pessoa', [
                     'action' => 'editdelete',
@@ -24,7 +56,7 @@ $form->setAttribute('action', $this->url('pessoa', [
 
 // Componente dialog para confirmação de ações
 $dialogdeletar = $form->get('dialogdeletar');
-$dialogdeletar->setAttribute('class', 'btn btn-primary mr-2');
+$dialogdeletar->setAttribute('class', 'btn btn-primary');
 $dialogdeletar->setAttribute('data-toggle', 'modal');
 $dialogdeletar->setAttribute('data-target', '#modalExemplo');
 
@@ -34,22 +66,63 @@ echo $this->form()->openTag($form);
 ?>
 <?php // Wrap the elements in divs marked as form groups, and render the
       // label, element, and errors separately within ?>
-<div class="form-group w-50 p-3 border bg-light row">
-    <?= $this->formLabel($nome) ?>
-    <?= $this->formElement($nome) ?>
-    <?= $this->formElementErrors()->render($nome, ['class' => 'help-block']) ?>
-</div>
+<form>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <?= $this->formLabel($nome) ?>
+            <?= $this->formElement($nome) ?>
+            <?= $this->formElementErrors()->render($nome, ['class' => 'help-block']) ?>
+        </div>    
+        <div class="form-group col-md-3">
+            <?= $this->formLabel($tipo) ?>
+            <?= $this->formElement($tipo) ?>
+            <?= $this->formElementErrors()->render($tipo, ['class' => 'help-block']) ?>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-2">
+            <?= $this->formLabel($rg) ?>
+            <?= $this->formElement($rg) ?>
+            <?= $this->formElementErrors()->render($rg, ['class' => 'help-block']) ?>
+        </div>
+        <div class="form-group col-md-2">
+            <?= $this->formLabel($cpfcnpj) ?>
+            <?= $this->formElement($cpfcnpj) ?>
+            <?= $this->formElementErrors()->render($cpfcnpj, ['class' => 'help-block']) ?>
+        </div>
+        <div class="form-group col-md-2">
+            <?= $this->formLabel($datanasc) ?>
+            <?= $this->formElement($datanasc) ?>
+            <?= $this->formElementErrors()->render($datanasc, ['class' => 'help-block']) ?>
+        </div>
+        <div class="form-group col-md-6">
+            <?= $this->formLabel($localnasc) ?>
+            <?= $this->formElement($localnasc) ?>
+            <?= $this->formElementErrors()->render($localnasc, ['class' => 'help-block']) ?>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-2">
+            <?= $this->formLabel($estadonasc) ?>
+            <?= $this->formElement($estadonasc) ?>
+            <?= $this->formElementErrors()->render($estadonasc, ['class' => 'help-block']) ?>
+        </div>
+    </div>
 
-<?php
-echo $this->formSubmit($submit);
-echo $this->formButton($dialogdeletar, 'Deletar');
-echo $this->formHidden($form->get('id'));
-echo $this->form()->closeTag();
-?>
-<p>
-    <a href="<?= $this->url('pessoa', ['action' => 'index']) ?>" class="btn btn-primary mt-5">Voltar para Pesquisa</a>
-</p>    
-
+    <div class="form-row border bg-light">
+        <div class="form-group col-md-0 mt-3">
+            <?= $this->formSubmit($submit) ?>
+            <?= $this->formHidden($form->get('id')) ?>
+        </div>
+        <div class="form-group col-md-0 mt-3">
+            <?= $this->formButton($dialogdeletar, 'Deletar') ?>
+            <?= $this->form()->closeTag() ?>
+        </div>
+        <div class="form-group col-md-1">
+            <a href="<?= $this->url('pessoa', ['action' => 'index']) ?>" class="btn btn-primary mt-3">Voltar para Pesquisa</a>
+        </div>
+    </div>
+</form>
 
 <?php
     // Modal de exclusão de arquivo

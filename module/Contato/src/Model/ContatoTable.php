@@ -12,7 +12,6 @@ use Laminas\Paginator\Adapter\DbSelect;
 use Laminas\Paginator\Paginator;
 use Laminas\Db\Sql\Sql;
 
-
 class ContatoTable {
     private $tableGateway;
 

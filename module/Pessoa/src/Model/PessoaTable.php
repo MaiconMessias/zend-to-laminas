@@ -31,11 +31,23 @@ class PessoaTable {
     {
         // Create a new Select object for the table:
         $select = new Select($this->tableGateway->getTable());
+        $select ->join(
+                ['tp' => 'tipopessoa'],     // join table with alias
+                'pessoa.tipo = tp.id',  // join expression
+                ['datanascimento' => new \Laminas\Db\Sql\Expression("to_char(datanascimento, 'DD/MM/YYYY')"),
+                 'descr' => 'descr'
+                ]
+        );
+        $select ->join(
+            ['est' => 'estado'],     // join table with alias
+            'pessoa.estadonascimento = est.id',  // join expression
+            ['descrestado' => 'descr']
+        );
 
+        //
         if ($ordenacao != null){
             $select->order($ordenacao);
         }    
-
 
         // Create a new result set based on the Pessoa entity:
         $resultSetPrototype = new ResultSet();
@@ -78,12 +90,24 @@ class PessoaTable {
         if ($id === 0) {
             $data = [
                 'nome'  => $pessoa->nome,
+                'tipo' => $pessoa->tipo,
+                'rg' => $pessoa->rg,
+                'cpfcnpj' => $pessoa->cpfcnpj,
+                'datanascimento' => $pessoa->datanascimento,
+                'localnascimento' => $pessoa->localnascimento,
+                'estadonascimento' => $pessoa->estadonascimento,
             ];
             $this->tableGateway->insert($data);
             return;
         } else {
             $data = [
                 'nome'  => $pessoa->nome,
+                'tipo' => $pessoa->tipo,
+                'rg' => $pessoa->rg,
+                'cpfcnpj' => $pessoa->cpfcnpj,
+                'datanascimento' => $pessoa->datanascimento,
+                'localnascimento' => $pessoa->localnascimento,
+                'estadonascimento' => $pessoa->estadonascimento,
             ];
         }
 

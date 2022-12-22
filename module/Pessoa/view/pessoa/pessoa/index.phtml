@@ -16,6 +16,12 @@
             <tr class="border bg-light">
                 <th scope="col">Id </th>
                 <th scope="col">Nome</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">RG</th>
+                <th scope="col">CPF/CNPJ</th>
+                <th scope="col">Data Nascimento</th>
+                <th scope="col">Local Nascimento</th>
+                <th scope="col">Estado Nascimnto</th>
             </tr>
         </thead>    
         <?php foreach ($paginator as $pessoa) : ?>
@@ -23,6 +29,12 @@
                 <tr class="tabelahover" onclick="window.location='<?= $this->url('pessoa', ['action' => 'editdelete', 'id' => $pessoa->id]) ?>'">
                     <td><?= $this->escapeHtml($pessoa->id) ?></td>
                     <td><?= $this->escapeHtml($pessoa->nome) ?></td>
+                    <td><?= $this->escapeHtml($pessoa->descr) ?></td>
+                    <td><?= $this->escapeHtml($pessoa->rg) ?></td>
+                    <td><?= $this->escapeHtml($pessoa->cpfcnpj) ?></td>
+                    <td><?= $this->escapeHtml($pessoa->datanascimento) ?></td>
+                    <td><?= $this->escapeHtml($pessoa->localnascimento) ?></td>
+                    <td><?= $this->escapeHtml($pessoa->descrestado) ?></td>
                 </tr>
             </tbody>
         <?php endforeach; ?>

@@ -3,10 +3,17 @@
     $this->headTitle($title);
 ?>
 <h1><?= $this->escapeHtml($title) ?></h1>
+
+<?= $this->inlineScript()
+    ->prependFile($this->basePath('js/dist/jquery.inputmask.min.js'))
+    ->prependFile($this->basePath('js/contato/maskcontato.js'))
+?>
+
 <?php
     $contato = $form->get('contato');
     $contato->setAttribute('class', 'form-control');
     $contato->setAttribute('placeholder', 'contato');
+    $contato->setAttribute('id', 'tel');
 
     $id_pessoa = $form->get('id_pessoa');
     $id_pessoa->setAttribute('class', 'form-control');
@@ -26,18 +33,28 @@
 ?>
 <?php // Wrap the elements in divs marked as form groups, and render the
       // label, element, and errors separately within ?>
-<div class="form-group w-50 p-3 border bg-light">
-    <?= $this->formLabel($contato) ?>
-    <?= $this->formElement($contato) ?>
-    <?= $this->formElementErrors()->render($contato, ['class' => 'help-block']) ?>
-    <?= $this->formLabel($id_pessoa) ?>
-    <?= $this->formElement($id_pessoa) ?>
-    <?= $this->formElementErrors()->render($id_pessoa, ['class' => 'help-block']) ?>
-</div>
+<form>      
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <?= $this->formLabel($contato) ?>
+            <?= $this->formElement($contato) ?>
+            <?= $this->formElementErrors()->render($contato, ['class' => 'help-block']) ?>
+        </div>
+        <div class="form-group col-md-3">
+            <?= $this->formLabel($id_pessoa) ?>
+            <?= $this->formElement($id_pessoa) ?>
+            <?= $this->formElementErrors()->render($id_pessoa, ['class' => 'help-block']) ?>
+        </div>
+    </div>
 
-<?php
-    echo $this->formSubmit($submit);
-    echo $this->formHidden($form->get('id'));
-    echo $this->form()->closeTag();
-?>
-<a href="<?= $this->url('contato', ['action' => 'index']) ?>" class="btn btn-primary mt-5">Voltar para Pesquisa</a>
+    <div class="form-row border bg-light">
+        <div class="form-group col-md-1 mt-3 mr-2">
+            <?= $this->formSubmit($submit); ?>
+            <?= $this->formHidden($form->get('id')); ?>
+            <?= $this->form()->closeTag(); ?>
+        </div>
+        <div class="form-group col-md-1">
+            <a href="<?= $this->url('contato', ['action' => 'index']) ?>" class="btn btn-primary mt-3">Voltar para Pesquisa</a>
+        </div>
+    </div>
+</form>

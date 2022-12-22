@@ -1,8 +1,7 @@
 <?php
 
-  namespace Contato\Model;
+  namespace Contato\Model\Select;
  
-  use Pessoa\Model\PessoaTable;
   use Laminas\Db\Adapter\Adapter as DbAdapter;
   use Laminas\Db\Sql\Sql;
   use Laminas\Db\ResultSet\ResultSet;

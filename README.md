@@ -5,6 +5,25 @@ Introduction
 ------------
 This application followed the [Migration to Laminas](https://docs.laminas.dev/migration/) website instructions for converting.
 
+## Module structure
+```sh
+zend-to-laminas/
+    /module
+        /Module
+        /config
+        /src
+            /Controller
+            /Form
+            /Model
+        /tests    
+        /view    
+            /filter (optional)
+            /layout (layout of pages - optional)
+            /<name-pasta-views>
+            /<name-pasta-views>
+    
+```
+
 Installation using Composer
 ---------------------------
 

@@ -118,8 +118,11 @@ echo $this->form()->openTag($form);
             <?= $this->formButton($dialogdeletar, 'Deletar') ?>
             <?= $this->form()->closeTag() ?>
         </div>
-        <div class="form-group col-md-1">
+        <div class="form-group col-md-1 mr-5">
             <a href="<?= $this->url('pessoa', ['action' => 'index']) ?>" class="btn btn-primary mt-3">Voltar para Pesquisa</a>
+        </div>
+        <div class="form-group col-md-1 ml-5">
+            <a href="<?= $this->url('pessoa', ['action' => 'contatos', 'id' => $id]) ?>" class="btn btn-primary mt-3">Contatos</a>
         </div>
     </div>
 </form>

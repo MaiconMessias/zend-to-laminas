@@ -8,6 +8,7 @@ use Laminas\Db\Adapter\Adapter as DbAdapter;
 use Laminas\Authentication\Adapter\DbTable\CallbackCheckAdapter as AuthAdapter;
 use Login\Model\Login;
 
+session_start();
 class LoginController extends AbstractActionController {
 
     public function indexAction()
@@ -54,6 +55,7 @@ class LoginController extends AbstractActionController {
             print_r($authAdapter->getResultRowObject());
             $form->get('username')->setValue('logado');
             $form->get('password')->setValue('logado');
+            session_destroy();
             return $this->redirect()->toRoute('application');
         } else {
             echo 'Usuario e ou Senha não encontrados';

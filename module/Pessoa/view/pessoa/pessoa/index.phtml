@@ -5,12 +5,13 @@
     $this->headTitle($title);
 ?>
 <h1><?= $this->escapeHtml($title) ?></h1>
-<p>
-    <a href="<?= $this->url('pessoa', ['action' => 'add']) ?>" class="btn btn-primary mt-5">Adicionar nova pessoa</a>
-</p>
-<p>
-    <?php include __DIR__ . '/../../filter/filteragenda/filtroordenar.phtml'; ?>
-</p>
+    <p>
+        <a href="<?= $this->url('pessoa', ['action' => 'add']) ?>" class="btn btn-primary mt-5">Adicionar nova pessoa</a>
+    </p>
+    <p>
+        <?php include __DIR__ . '/../../filter/filteragenda/filtroordenar.phtml'; ?>
+        <!-- <a href="<?php //$this->url('pessoa', ['action' => 'filtroordenar']) ?>" class="btn btn-primary mt-5">Ordenar</a> -->
+    </p>
     <table class="table table-hover">
         <thead>
             <tr class="border bg-light">

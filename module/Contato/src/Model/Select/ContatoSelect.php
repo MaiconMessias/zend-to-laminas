@@ -37,7 +37,8 @@
         public function arrayPessoas(){
             $pessoas = $this->getPessoas();
     
-            $data = [];     
+            $data = []; 
+            $data[0] = "-- Selecione uma Pessoa --";    
             foreach ($pessoas as $pessoa){
                 $data[$pessoa->id] = $pessoa->nome;
             }  

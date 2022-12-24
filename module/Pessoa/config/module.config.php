@@ -22,6 +22,20 @@
                         ],
                     ],
                 ],
+                'filtropessoa' => [
+                    'type'    => Segment::class,
+                    'options' => [
+                        'route' => '/pessoa[/:action[/:ordenar]]',
+                        'constraints' => [
+                            'action'      => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            'ordenar'     => '[0-9]+',
+                        ],
+                        'defaults' => [
+                            'controller' => Controller\PessoaController::class,
+                            'action'     => 'index',
+                        ],
+                    ],
+                ],
             ],
         ],        
         'view_manager' => [

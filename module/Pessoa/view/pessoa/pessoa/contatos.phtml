@@ -1,0 +1,29 @@
+<?php
+    $this->layout('layout/layoutagenda/layoutpessoa');
+
+    $title = 'Contatos';
+    $this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+    <p>
+        <a href="<?= $this->url('pessoa', ['action' => 'editdelete', 'id' => $id_pessoa]) ?>" class="btn btn-primary mt-5">Voltar Cadastro Pessoa</a>
+    </p>
+    <table class="table w-25">
+        <thead>
+            <tr class="bg-light">
+                <th scope="col">Contato</th>
+            </tr>
+        </thead>    
+        <?php foreach ($contatos as $contato) : ?>
+            <tbody>
+                <tr>
+                    <td><?= $this->escapeHtml($contato->contato) ?></td>
+                </tr>
+            </tbody>
+        <?php endforeach; ?>
+    </table>
+
+<?php   
+  // Footer
+  $this->layout()->setVariable('infoText', '<a href="' . $this->url('login', ['action' => 'index']) . '" class="nav-link px-2 text-muted">Logout</a>');
+?>    

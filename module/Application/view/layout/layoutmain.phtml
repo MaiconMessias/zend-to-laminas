@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <?= $this->headTitle('Laminas MVC')->setSeparator(' - ')->setAutoEscape(false) ?>
+
+    <?= $this->headMeta()
+        ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+        ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+    ?>
+
+    <!-- Le styles -->
+    <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'])
+        ->prependStylesheet($this->basePath('css/style.css'))
+        ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
+    ?>
+
+    <!-- Scripts -->
+    <?= $this->inlineScript()
+        ->prependFile($this->basePath('js/bootstrap.min.js'))
+        ->prependFile($this->basePath('js/jquery-3.3.1.min.js'))
+        //->prependFile($this->basePath('js/dist/jquery.inputmask.min.js'))
+        //->prependFile('https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.7/inputmask.es6.js')
+        //->prependFile($this->basePath('js/dist/jquery.inputmask.min.js'))
+        
+    ?>
+</head>
+<body>
+    <header></header>
+    <section>
+        <div class="container">
+            <div class="container">
+                <?= $this->content ?>
+            </div>
+        </div>
+    </section>    
+    
+    <div class="container w-100 fixed-bottom">        
+        <footer class="py-3 my-4">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item">
+            <?php if (isset($infoText)){
+                      echo $infoText;
+                  }
+            ?> 
+            </li>
+            <li class="nav-item">
+                <a href="<?= $this->url('application', ['action' => 'index']) ?>" class="nav-link px-2 text-muted">Início</a>
+            </li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+            </ul>
+            <p class="text-center text-muted">© Feito pelo Maicon 2022</p>
+
+            <!-- teste funcionamento jquery -->            
+            <!-- <script>
+                $(document).ready(function(){
+                    console.log("OK");
+                    $("#example2").inputmask("(999)9999-9999");
+                });
+            </script> -->
+        </footer>
+    </div>
+
+</body>
+</html>

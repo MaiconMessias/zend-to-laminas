@@ -37,10 +37,17 @@ class TipoPessoaSelect {
     public function arrayTipoPessoas(){
         $tipopessoas = $this->getTipoPessoa();
 
-        $data = [];     
+        $data = [];
+        $data[0] = "-- Selecione um Tipo de Pessoa --";
         foreach ($tipopessoas as $tipopessoa){
-            $data[$tipopessoa->id] = $tipopessoa->descr;
+            //$data[$tipopessoa->id] = $tipopessoa->descr;
+            $data[$tipopessoa->id] = [
+                'value' => $tipopessoa->id,
+                'label' => $tipopessoa->descr,
+                //'selected' => $tipopessoa->id == 2 ? true : false,
+            ];
         }  
+        
         return $data;
     }
 

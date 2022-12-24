@@ -4,18 +4,18 @@
 
     $campos = new Element\Select('campo');
     $campos->setLabel('Campo para ordenação?');
-    $campos->setAttribute('class', 'nav-link dropdown-toggle col ml-2 mr-2');
+    $campos->setAttribute('class', 'form-control col ml-2 mr-2');
     $campos->setValueOptions([
-        '0' => 'Id',
-        '1' => 'Nome',
+        'id' => 'Id',
+        'nome' => 'Nome',
     ]);
 
     $select = new Element\Select('ordenacao');
     $select->setLabel('Ordem de visualização?');
-    $select->setAttribute('class', 'nav-link dropdown-toggle col ml-2');
+    $select->setAttribute('class', 'form-control col ml-2');
     $select->setValueOptions([
-        '0' => 'Crescente',
-        '1' => 'Decrescente',
+        'ASC' => 'Crescente',
+        'DESC' => 'Decrescente',
     ]);
 
     $submit = new Element\Submit('my-submit');
@@ -26,8 +26,9 @@
     $form->add($campos);
     $form->add($select);
 
-    $form->setAttribute('action', $this->url('pessoa', [
-                        'action' => 'index',
+    $form->setAttribute('action', $this->url('filtropessoa', [
+                        'action' => 'index', 
+                        'ordenar' => '1',
                         ]));
 
     $form->prepare();

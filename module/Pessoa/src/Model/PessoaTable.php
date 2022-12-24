@@ -8,6 +8,7 @@ use Laminas\Db\Sql\Select;
 use Laminas\Db\TableGateway\TableGatewayInterface;
 use Laminas\Paginator\Adapter\DbSelect;
 use Laminas\Paginator\Paginator;
+use Laminas\Db\Sql\Sql;
 
 class PessoaTable {
     private $tableGateway;
@@ -44,10 +45,12 @@ class PessoaTable {
             ['descrestado' => 'descr']
         );
 
-        //
-        if ($ordenacao != null){
+        // ordenação
+        if (trim($ordenacao) != ""){
             $select->order($ordenacao);
-        }    
+        } else {
+            $select->order('id ASC');
+        }   
 
         // Create a new result set based on the Pessoa entity:
         $resultSetPrototype = new ResultSet();
@@ -137,5 +140,17 @@ class PessoaTable {
             // the adapter to run it against:
             $this->tableGateway->getAdapter()
         );
+    }
+
+    public function getContatosPessoa($id){
+        $sql    = new Sql($this->tableGateway->getAdapter());
+        $select = $sql->select();
+        $select->from('contato')->where(['id_pessoa' => $id]);
+
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $results = $statement->execute();            
+
+        $resultSet = new ResultSet;
+        return $resultSet->initialize($results);
     }
 }

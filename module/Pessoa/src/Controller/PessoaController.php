@@ -11,6 +11,7 @@ use Laminas\Form\Form;
 use Pessoa\Model\Select\TipoPessoaSelect;
 use Pessoa\Model\Select\EstadoSelect;
 
+session_start();
 class PessoaController extends AbstractActionController {
 
     // Add this property:
@@ -24,15 +25,27 @@ class PessoaController extends AbstractActionController {
 
     public function indexAction()
     {
-        
-        if (null !== $this->getRequest()) {
+        $ordenar = (int) $this->params()->fromRoute('ordenar', 0);
+
+        // IMPLEMENTAR FILTRO AVANÇADO
+        $this->filtroordenar();
+
+        // se for clicado no botao de ordenação
+        if (1 === $ordenar) {
             $request = $this->getRequest();
             // Implementar atribuição dos valores dos campos em outro arquivo
-            $campo = $request->getPost()['campo'] == 0 ? 'pessoa.id' : 'pessoa.nome';
-            $ordem = $request->getPost()['ordenacao'] == 0 ? 'ASC' : 'DESC';
+            //$campo = $request->getPost()['campo'] == 0 ? 'pessoa.id' : 'pessoa.nome';
+            //$ordem = $request->getPost()['ordenacao'] == 0 ? 'ASC' : 'DESC';
+            $campo = $request->getPost()['campo'];
+            $ordem = $request->getPost()['ordenacao'];
+            $_SESSION['campo'] = $campo;
+            $_SESSION['ordenacao'] = $ordem;
             $ordenacao = $campo . ' ' . $ordem;
+        } else {
+            // se existir campo para ordenação
+            if (isset($_SESSION['campo']) && isset($_SESSION['ordenacao']))
+                $ordenacao = $_SESSION['campo'] . ' ' . $_SESSION['ordenacao'];
         }
-        
 
         // Grab the paginator from the PessoaTable:
         $paginator = $this->table->fetchAll(true, $ordenacao);
@@ -181,8 +194,8 @@ class PessoaController extends AbstractActionController {
         ];
     }
 
-    public function testefiltroAction(){
-        $request = $this->getRequest();
+    public function filtroordenar(){
+        /*$request = $this->getRequest();
         
         $form = new Form('form-filtro');
         $form->setData($request->getPost());
@@ -194,8 +207,16 @@ class PessoaController extends AbstractActionController {
         $ordenacao = $campo . ' ' . $ordem;
 
         $result = $this->table->filtroTeste($ordenacao);
-        return $this->redirect()->toRoute('pessoa', ['action' => 'index', 'paginator' => $result]);
+        return $this->redirect()->toRoute('pessoa', ['action' => 'index', 'paginator' => $result]);*/
+        //return new ViewModel();
+        echo 'teste';
         /*echo $request->getPost()['campo'] == 0 ? 'id' : 'nome'; 
         echo $request->getPost()['ordenacao'];  */
+    }
+
+    public function contatosAction(){
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $contatos = $this->table->getContatosPessoa($id);
+        return new ViewModel(['contatos' => $contatos, 'id_pessoa' => $id]);
     }
 }

@@ -37,7 +37,8 @@ class EstadoSelect {
     public function arrayEstados(){
         $estados = $this->getEstados();
 
-        $data = [];     
+        $data = [];
+        $data[0] = "-- Selecione um Estado --";     
         foreach ($estados as $estado){
             $data[$estado->id] = $estado->descr;
         }  

@@ -24,6 +24,10 @@ zend-to-laminas/
     
 ```
 
+# Version of php and composer
+- PHP 7.4.30
+- Composer 1.10.26
+
 Installation using Composer
 ---------------------------
 

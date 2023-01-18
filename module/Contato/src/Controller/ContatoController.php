@@ -8,6 +8,7 @@
   use Contato\Form\ContatoForm;
   use Contato\Model\Contato;
   use Contato\Model\Select\ContatoSelect;
+  use Psr\Container\ContainerInterface;
   
   class ContatoController extends AbstractActionController {
       // Add this property:
@@ -23,7 +24,7 @@
      public function indexAction()
      {
         $paginator = $this->table->fetchAll(true);
-    
+
         // Set the current page to what has been passed in query string,
         // or to 1 if none is set, or the page is invalid:
         $page = (int) $this->params()->fromQuery('page', 1);
@@ -101,8 +102,9 @@
          );
  
          $request = $this->getRequest();
+
          $viewData = ['id' => $id, 'form' => $form];
- 
+         
          if (! $request->isPost()) {
              return $viewData;
          }

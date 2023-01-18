@@ -1,6 +1,8 @@
 <?php
 // module/Album/view/pessoa/pessoa/add.phtml:
-$this->layout('layout/layoutagenda/layoutpessoa');
+$url = $this->url('pessoa', ['action' => 'delete', 'id' => $id]);
+include \Application\Module::getJanelaDeletar();
+$this->layout('layout/layout');
 $title = 'Dados da Pessoa';
 $this->headTitle($title);
 ?>
@@ -10,9 +12,6 @@ $this->headTitle($title);
     $this->inlineScript()
          ->prependFile($this->basePath('js/dist/jquery.inputmask.min.js'))
          ->prependFile($this->basePath('js/pessoa/maskpessoa.js'));
-
-
-$url = $this->url('pessoa', ['action' => 'delete', 'id' => $id]);
 
 $nome = $form->get('nome');
 $nome->setAttribute('class', 'form-control col ml-2');
@@ -126,14 +125,3 @@ echo $this->form()->openTag($form);
         </div>
     </div>
 </form>
-
-<?php
-    // Modal de exclusão de arquivo
-    //include __DIR__ . '/../layout/layoutagenda/modaldelete.phtml';
-    include 'module/Application/view/window/modaldelete.phtml';
-?>
-
-<?php 
-    // Footer
-    //$this->layout()->setVariable('infoText', '<a href=' . $this->url('pessoa', ['action' => 'add']) . ' class="nav-link px-2 text-muted">Voltar</a>');
-?> 

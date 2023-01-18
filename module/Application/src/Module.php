@@ -15,4 +15,9 @@ class Module
     {
         return include __DIR__ . '/../config/module.config.php';
     }
+
+    public static function getJanelaDeletar(){
+        return __DIR__ . '/../view/window/modaldelete.phtml';
+    }
+
 }

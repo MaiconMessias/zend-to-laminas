@@ -9,6 +9,7 @@ use Laminas\Db\TableGateway\TableGatewayInterface;
 use Laminas\Paginator\Adapter\DbSelect;
 use Laminas\Paginator\Paginator;
 use Laminas\Db\Sql\Sql;
+use Laminas\Db\Sql\Expression;
 
 class PessoaTable {
     private $tableGateway;
@@ -35,7 +36,7 @@ class PessoaTable {
         $select ->join(
                 ['tp' => 'tipopessoa'],     // join table with alias
                 'pessoa.tipo = tp.id',  // join expression
-                ['datanascimento' => new \Laminas\Db\Sql\Expression("to_char(datanascimento, 'DD/MM/YYYY')"),
+                ['datanascimento' => new Expression("to_char(datanascimento, 'DD/MM/YYYY')"),
                  'descr' => 'descr'
                 ]
         );

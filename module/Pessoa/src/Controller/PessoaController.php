@@ -209,7 +209,6 @@ class PessoaController extends AbstractActionController {
         $result = $this->table->filtroTeste($ordenacao);
         return $this->redirect()->toRoute('pessoa', ['action' => 'index', 'paginator' => $result]);*/
         //return new ViewModel();
-        echo 'teste';
         /*echo $request->getPost()['campo'] == 0 ? 'id' : 'nome'; 
         echo $request->getPost()['ordenacao'];  */
     }

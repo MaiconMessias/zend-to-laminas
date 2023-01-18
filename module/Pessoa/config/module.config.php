@@ -25,7 +25,7 @@
                 'filtropessoa' => [
                     'type'    => Segment::class,
                     'options' => [
-                        'route' => '/pessoa[/:action[/:ordenar]]',
+                        'route' => '/pessoa[/:action[/:id][/:ordenar]]',
                         'constraints' => [
                             'action'      => '[a-zA-Z][a-zA-Z0-9_-]*',
                             'ordenar'     => '[0-9]+',
@@ -40,7 +40,6 @@
         ],        
         'view_manager' => [
             'template_map' => [
-                'layout/layout'      => __DIR__ . '/../view/layout/layoutagenda/layoutpessoa.phtml',
                 'view/pessoa/pessoa' => __DIR__ . '/../view/pessoa/pessoa/index.phtml',
             ],
             'template_path_stack' => [

@@ -48,7 +48,10 @@ return [
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
         'template_map' => [
-            //'layout/layoutmain'           => __DIR__ . '/../view/layout/layoutmain.phtml',
+            'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
+            'layout/layoutmain'       => __DIR__ . '/../view/layout/layoutmain.phtml',
+            'layout/layoutmodaldelete'=> __DIR__ . '/../view/layout/layoutmodaldelete.phtml',
+            'layout/layoutpesquisas'  => __DIR__ . '/../view/layout/layoutpesquisas.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',

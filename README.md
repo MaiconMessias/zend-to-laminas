@@ -38,7 +38,9 @@ Create your new ZF2 project:
 
     composer create-project -n -sdev laminas/skeleton-application path/to/install
 
+### Migration to Laminas
 
+[Documentation - Migration to Laminas](https://docs.laminas.dev/migration/)
 
 ### Installation using a tarball with a local Composer
 

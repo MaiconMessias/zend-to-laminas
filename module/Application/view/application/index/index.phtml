@@ -1,24 +1,54 @@
 <?php
   $this->layout('layout/layoutmain');
 ?>
+<div class="pos-f-t fixed-top">
+  <nav class="navbar navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain" aria-controls="navbarMain" aria-expanded="true" aria-label="Alterna navegação">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light border fixed-top">
-  <span class="navbar-brand">Agenda</span>
+  <!-- navbarMain: Submenu -->
+    <div class="collapse multi-collapse" id="navbarMain">
+      <!-- accordion -->
+      <div id="accordion" class="w-25 bg-light">
+        <div class="card rounded-0">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-link text-black" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Pesquisas
+              </button>
+            </h5>
+          </div>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Pesquisas
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item btn btn-primary mb-2" href="<?= $this->url('pessoa', ['action' => 'index']) ?>">Pessoa</a>
-          <a class="dropdown-item btn btn-primary mb-2" href="<?= $this->url('contato', ['action' => 'index']) ?>">Contato</a>
-        </div>
-      </li>
-    </ul>
+          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+              <p><a class="btn btn-link text-black mb-2" href="<?= $this->url('pessoa', ['action' => 'index']) ?>">Pessoa</a></p>
+              <p><a class="btn btn-link text-black mb-2" href="<?= $this->url('contato', ['action' => 'index']) ?>">Contato</a></p>
+            </div>
+          </div>
+        </div>    
+      <!-- accordion -->
+      <!-- accordion -->
+        <div class="card rounded-0">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-link text-black" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                Configurações
+              </button>
+            </h5>
+          </div>
+
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+            </div>
+          </div>
+        </div>    
+      </div>
+      <!-- accordion -->
   </div>
-</nav>
+</div>
 
 <?php   
   // Footer

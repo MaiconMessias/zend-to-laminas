@@ -7,9 +7,18 @@ use Login\Form\LoginForm;
 use Laminas\Db\Adapter\Adapter as DbAdapter;
 use Laminas\Authentication\Adapter\DbTable\CallbackCheckAdapter as AuthAdapter;
 use Login\Model\Login;
+use Laminas\Session\Container;
+use Laminas\Authentication\AuthenticationService;
 
-session_start();
+//session_start();
 class LoginController extends AbstractActionController {
+
+    private $auth;
+
+    public function __construct()
+    {
+        $this->auth = new AuthenticationService();
+    }
 
     public function indexAction()
     {
@@ -44,22 +53,31 @@ class LoginController extends AbstractActionController {
             'password'
         );
         $authAdapter
-        ->setIdentity($request->getPost()['username'])
-        ->setCredential($request->getPost()['password']);
+            ->setIdentity($request->getPost()['username'])
+            ->setCredential($request->getPost()['password']);
     
         // Perform the authentication query, saving the result
         $result = $authAdapter->authenticate();
-        
-        if (! null == $authAdapter->getResultRowObject()){   
+
+        $this->auth->authenticate($authAdapter);
+
+        if ($result->isValid()) {    
             echo 'Bem vindo(a) ' . $result->getIdentity() . "\n\n"; 
             print_r($authAdapter->getResultRowObject());
             $form->get('username')->setValue('logado');
             $form->get('password')->setValue('logado');
-            session_destroy();
+            //session_destroy();
             return $this->redirect()->toRoute('application');
+
+            //return ['form' => $form];        
         } else {
-            echo 'Usuario e ou Senha não encontrados';
-            return ['form' => $form];        
+                echo 'Usuario e ou Senha não encontrados';
+                return ['form' => $form];        
         }
+    }
+
+    public function logoutAction(){
+        $this->auth->clearIdentity();
+        return $this->redirect()->toRoute('login');
     }
 }

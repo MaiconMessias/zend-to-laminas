@@ -9,15 +9,21 @@
   use Contato\Model\Contato;
   use Contato\Model\Select\ContatoSelect;
   use Psr\Container\ContainerInterface;
+  use Laminas\Authentication\AuthenticationService as AuthenticationService;
   
   class ContatoController extends AbstractActionController {
       // Add this property:
       private $table;
+      private $auth;
 
      // Add this constructor:
      public function __construct(ContatoTable $table)
      {
          $this->table = $table;
+         $this->auth = new AuthenticationService();
+        // Verifica se o usurário está logado
+        if (! $this->auth->hasIdentity())
+            return $this->redirect()->toRoute('login');
      }
 
      // Lista de Contatos

@@ -10,17 +10,23 @@ use Pessoa\Model\Pessoa;
 use Laminas\Form\Form;
 use Pessoa\Model\Select\TipoPessoaSelect;
 use Pessoa\Model\Select\EstadoSelect;
+use Laminas\Authentication\AuthenticationService as AuthenticationService;
 
 session_start();
 class PessoaController extends AbstractActionController {
 
     // Add this property:
     private $table;
+    private $auth;
 
     // Add this constructor:
     public function __construct(PessoaTable $table)
     {
         $this->table = $table;
+        $this->auth = new AuthenticationService();
+        // Verifica se o usurário está logado
+        if (! $this->auth->hasIdentity())
+            return $this->redirect()->toRoute('login');
     }
 
     public function indexAction()

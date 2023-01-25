@@ -55,7 +55,8 @@
         "allow-plugins": {
             "laminas/laminas-component-installer": true,
             "laminas/laminas-dependency-plugin": true
-        }
+        },
+        "process-timeout": 2000
     },
     "require-dev": {
         "laminas/laminas-developer-tools": "^2.5"

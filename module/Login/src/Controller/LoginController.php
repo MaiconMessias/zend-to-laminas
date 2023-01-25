@@ -78,6 +78,7 @@ class LoginController extends AbstractActionController {
 
     public function logoutAction(){
         $this->auth->clearIdentity();
+        session_destroy();
         return $this->redirect()->toRoute('login');
     }
 }

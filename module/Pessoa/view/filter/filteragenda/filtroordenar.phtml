@@ -5,6 +5,7 @@
     $campos = new Element\Select('campo');
     $campos->setLabel('Campo para ordenação?');
     $campos->setAttribute('class', 'form-control col ml-2 mr-2');
+    $campos->setValue($campo);
     $campos->setValueOptions([
         'id' => 'Id',
         'nome' => 'Nome',
@@ -13,10 +14,12 @@
     $select = new Element\Select('ordenacao');
     $select->setLabel('Ordem de visualização?');
     $select->setAttribute('class', 'form-control col ml-2');
+    $select->setValue($ordem);
     $select->setValueOptions([
         'ASC' => 'Crescente',
         'DESC' => 'Decrescente',
     ]);
+    $select->setOption('teste', 'teste');
 
     $submit = new Element\Submit('my-submit');
     $submit->setAttribute('class', 'btn btn-primary col ml-2');

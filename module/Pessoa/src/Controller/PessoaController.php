@@ -33,24 +33,25 @@ class PessoaController extends AbstractActionController {
     {
         $ordenar = (int) $this->params()->fromRoute('ordenar', 0);
 
-        // IMPLEMENTAR FILTRO AVANÇADO
-        $this->filtroordenar();
 
         // se for clicado no botao de ordenação
         if (1 === $ordenar) {
             $request = $this->getRequest();
-            // Implementar atribuição dos valores dos campos em outro arquivo
-            //$campo = $request->getPost()['campo'] == 0 ? 'pessoa.id' : 'pessoa.nome';
-            //$ordem = $request->getPost()['ordenacao'] == 0 ? 'ASC' : 'DESC';
-            $campo = $request->getPost()['campo'];
-            $ordem = $request->getPost()['ordenacao'];
-            $_SESSION['campo'] = $campo;
-            $_SESSION['ordenacao'] = $ordem;
-            $ordenacao = $campo . ' ' . $ordem;
+            // IMPLEMENTAR FILTRO AVANÇADO
+            $ordenacao = $this->filtroordenar(array(
+                                                        'campo' => $request->getPost()['campo'],
+                                                        'ordenacao' => $request->getPost()['ordenacao'],
+                                                    ));
+
+            $campo = $request->getPost()['campo'];  
+            $ordem = $request->getPost()['ordenacao'];                                                  
         } else {
             // se existir campo para ordenação
-            if (isset($_SESSION['campo']) && isset($_SESSION['ordenacao']))
+            if (isset($_SESSION['campo']) && isset($_SESSION['ordenacao'])) {
                 $ordenacao = $_SESSION['campo'] . ' ' . $_SESSION['ordenacao'];
+                $campo = $_SESSION['campo'];  
+                $ordem = $_SESSION['ordenacao'];                                                  
+            }
         }
 
         // Grab the paginator from the PessoaTable:
@@ -65,7 +66,8 @@ class PessoaController extends AbstractActionController {
         // Set the number of items per page to ..:
         $paginator->setItemCountPerPage(3);
 
-        return new ViewModel(['paginator' => $paginator]);
+        //$filtro = array('campo' => $campo, 'ordem' => $ordem);
+        return new ViewModel(['paginator' => $paginator, 'campo' => $campo, 'ordem' => $ordem]);
     }
 
     public function addAction()
@@ -200,7 +202,10 @@ class PessoaController extends AbstractActionController {
         ];
     }
 
-    public function filtroordenar(){
+    public function filtroordenar($parametros){
+        $_SESSION['campo'] = $parametros['campo'];
+        $_SESSION['ordenacao'] = $parametros['ordenacao'];
+        return $parametros['campo'] . ' ' . $parametros['ordenacao'];
         /*$request = $this->getRequest();
         
         $form = new Form('form-filtro');

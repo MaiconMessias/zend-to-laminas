@@ -7,7 +7,6 @@ use Laminas\Db\ResultSet\ResultSet;
 use Laminas\ModuleManager\Feature\ConfigProviderInterface;
 use Laminas\Db\TableGateway\TableGateway;
 
-
  class Module implements ConfigProviderInterface {
     /**
      * Configurações das factories laminas

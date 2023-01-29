@@ -31,31 +31,14 @@ class PessoaController extends AbstractActionController {
 
     public function indexAction()
     {
+        //** */ se for clicado no botao de ordenação
         $ordenar = (int) $this->params()->fromRoute('ordenar', 0);
-
-
-        // se for clicado no botao de ordenação
-        if (1 === $ordenar) {
-            $request = $this->getRequest();
-            // IMPLEMENTAR FILTRO AVANÇADO
-            $ordenacao = $this->filtroordenar(array(
-                                                        'campo' => $request->getPost()['campo'],
-                                                        'ordenacao' => $request->getPost()['ordenacao'],
-                                                    ));
-
-            $campo = $request->getPost()['campo'];  
-            $ordem = $request->getPost()['ordenacao'];                                                  
-        } else {
-            // se existir campo para ordenação
-            if (isset($_SESSION['campo']) && isset($_SESSION['ordenacao'])) {
-                $ordenacao = $_SESSION['campo'] . ' ' . $_SESSION['ordenacao'];
-                $campo = $_SESSION['campo'];  
-                $ordem = $_SESSION['ordenacao'];                                                  
-            }
-        }
+        
+        $filtro = $this->filtroordenar($ordenar, $this->getRequest());
+        /** */
 
         // Grab the paginator from the PessoaTable:
-        $paginator = $this->table->fetchAll(true, $ordenacao);
+        $paginator = $this->table->fetchAll(true, $filtro['ordenacao']);
     
         // Set the current page to what has been passed in query string,
         // or to 1 if none is set, or the page is invalid:
@@ -67,7 +50,7 @@ class PessoaController extends AbstractActionController {
         $paginator->setItemCountPerPage(3);
 
         //$filtro = array('campo' => $campo, 'ordem' => $ordem);
-        return new ViewModel(['paginator' => $paginator, 'campo' => $campo, 'ordem' => $ordem]);
+        return new ViewModel(['paginator' => $paginator, 'campo' => $filtro['campo'], 'ordem' => $filtro['ordem']]);
     }
 
     public function addAction()
@@ -98,7 +81,7 @@ class PessoaController extends AbstractActionController {
         }
 
         $pessoa = new Pessoa();
-        //$form->setInputFilter($pessoa->getInputFilter());
+        $form->setInputFilter($pessoa->getInputFilter());
         $form->setData($request->getPost());
 
         if (! $form->isValid()) {
@@ -202,26 +185,35 @@ class PessoaController extends AbstractActionController {
         ];
     }
 
-    public function filtroordenar($parametros){
-        $_SESSION['campo'] = $parametros['campo'];
-        $_SESSION['ordenacao'] = $parametros['ordenacao'];
-        return $parametros['campo'] . ' ' . $parametros['ordenacao'];
-        /*$request = $this->getRequest();
-        
-        $form = new Form('form-filtro');
-        $form->setData($request->getPost());
-        if (! $request->isPost()) {
-            return ['form' => $form];
-        }
-        $campo = $request->getPost()['campo'] == 0 ? 'id' : 'nome';
-        $ordem = $request->getPost()['ordenacao'] == 0 ? 'ASC' : 'DESC';
-        $ordenacao = $campo . ' ' . $ordem;
+    public function filtroordenar($ordenar, $request){
+        if (1 === $ordenar) {    
+            $request = $this->getRequest();
 
-        $result = $this->table->filtroTeste($ordenacao);
-        return $this->redirect()->toRoute('pessoa', ['action' => 'index', 'paginator' => $result]);*/
-        //return new ViewModel();
-        /*echo $request->getPost()['campo'] == 0 ? 'id' : 'nome'; 
-        echo $request->getPost()['ordenacao'];  */
+            // Campo com a ordenacao requerida
+            $ordenacao = $request->getPost()['campo'] . ' ' . $request->getPost()['ordenacao'];
+
+            // Setada as variaveis do filtro na sessão
+            $_SESSION['campo'] = $request->getPost()['campo'];
+            $_SESSION['ordenacao'] = $request->getPost()['ordenacao'];
+            // setado os valores dos campos dos componentes de select
+            $campo = $request->getPost()['campo'];  
+            $ordem = $request->getPost()['ordenacao'];                                                  
+        } else {
+            // se ordenação
+            if (isset($_SESSION['campo']) && isset($_SESSION['ordenacao'])) {
+                $ordenacao = $_SESSION['campo'] . ' ' . $_SESSION['ordenacao'];
+                $campo = $_SESSION['campo'];  
+                $ordem = $_SESSION['ordenacao'];                                                  
+            }
+        }
+        
+        $filtro = array(
+                        'ordenacao' => $ordenacao,
+                        'campo' => $campo,
+                        'ordem' => $ordem,
+                    );
+
+        return $filtro;
     }
 
     public function contatosAction(){

@@ -19,7 +19,7 @@ class PessoaForm extends Form
             'name' => 'nome',
             'type' => 'text',
             'options' => [
-                'label' => 'Nome',
+                'label' => 'Nome'
             ],
         ]);
         $this->add([
